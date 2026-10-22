@@ -14,6 +14,7 @@ import { BrowserWarning } from './BrowserWarning';
 import { sounds } from '../services/soundEffects';
 import { UserProgress, ShoppingScenario } from '../types/dialogue';
 import { getScenarioById, ALL_SCENARIOS } from '../data/scenarios';
+import { IMAGES } from '../constants/images';
 
 interface StartScreenProps {
   userProgress: UserProgress;
@@ -68,7 +69,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({
         {/* 3D Character & Store Scene Card */}
         <div className="relative w-full max-w-[300px] aspect-square rounded-3xl overflow-hidden shadow-xl shadow-slate-300/60 border-4 border-white bg-gradient-to-b from-[#A9D5F5]/30 to-white">
           <img
-            src="/src/assets/images/lucy_hero_greeting_1792578550259.jpg"
+            src={IMAGES.heroGreeting}
             alt="Lucy the store assistant welcoming you to shop"
             className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"

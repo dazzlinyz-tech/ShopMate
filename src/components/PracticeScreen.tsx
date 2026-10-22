@@ -21,6 +21,7 @@ import {
 import { getFeedback } from '../services/feedbackService';
 import { BrowserWarning } from './BrowserWarning';
 import { sounds } from '../services/soundEffects';
+import { IMAGES } from '../constants/images';
 
 interface PracticeScreenProps {
   scenario?: ShoppingScenario;
@@ -336,11 +337,11 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
   const isTurnCompleted = currentProgress.completed;
 
   // Decide Lucy portrait
-  let lucyImageSrc = '/src/assets/images/lucy_assistant_avatar_1792578551775.jpg';
+  let lucyImageSrc = IMAGES.assistantAvatar;
   if (isListening) {
-    lucyImageSrc = '/src/assets/images/lucy_listening_1792578551021.jpg';
+    lucyImageSrc = IMAGES.listening;
   } else if (isTurnCompleted) {
-    lucyImageSrc = '/src/assets/images/lucy_celebrating_1792578552114.jpg';
+    lucyImageSrc = IMAGES.celebrating;
   }
 
   return (
@@ -603,8 +604,8 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
               <img
                 src={
                   feedback.isSuccess
-                    ? '/src/assets/images/lucy_celebrating_1792578552114.jpg'
-                    : '/src/assets/images/lucy_assistant_avatar_1792578551775.jpg'
+                    ? IMAGES.celebrating
+                    : IMAGES.assistantAvatar
                 }
                 alt="Lucy"
                 className="w-full h-full object-cover"

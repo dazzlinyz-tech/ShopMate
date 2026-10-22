@@ -14,6 +14,7 @@ import { SpeechSynthesisManager } from '../services/speechService';
 import { StorageService } from '../services/storageService';
 import { sounds } from '../services/soundEffects';
 import { ALL_SCENARIOS } from '../data/scenarios';
+import { IMAGES } from '../constants/images';
 
 interface ResultScreenProps {
   scenario: ShoppingScenario;
@@ -118,7 +119,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
         {/* Celebrating Lucy 3D Character Card */}
         <div className="relative w-44 h-44 rounded-3xl overflow-hidden border-4 border-white shadow-xl shadow-slate-300/50 bg-gradient-to-b from-[#A9D5F5]/30 to-white mt-3 mb-2">
           <img
-            src="/src/assets/images/lucy_celebrating_1792578552114.jpg"
+            src={IMAGES.celebrating}
             alt="Lucy celebrating"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"

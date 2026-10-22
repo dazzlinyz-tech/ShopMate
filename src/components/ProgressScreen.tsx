@@ -12,6 +12,7 @@ import {
 import { UserProgress, ShoppingScenario } from '../types/dialogue';
 import { ALL_SCENARIOS, SCENARIOS_BY_LEVEL, getScenarioById } from '../data/scenarios';
 import { sounds } from '../services/soundEffects';
+import { IMAGES } from '../constants/images';
 
 interface ProgressScreenProps {
   userProgress: UserProgress;
@@ -76,7 +77,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
       <div className="bg-gradient-to-r from-[#A9D5F5]/40 via-white to-[#FF806B]/15 rounded-3xl p-4 border border-[#A9D5F5]/60 shadow-xs mb-4 flex items-center gap-3">
         <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 border-2 border-white shadow-sm bg-white">
           <img
-            src="/src/assets/images/lucy_celebrating_1792578552114.jpg"
+            src={IMAGES.celebrating}
             alt="Lucy"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
