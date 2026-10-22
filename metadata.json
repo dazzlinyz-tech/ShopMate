@@ -1,0 +1,6 @@
+{
+  "name": "ShopMate",
+  "description": "Interactive English speaking practice app for middle school students practicing shopping dialogues with friendly store assistant Lucy.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
