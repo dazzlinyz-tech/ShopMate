@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ShoppingBag,
   ArrowRight,
@@ -6,14 +6,14 @@ import {
   Volume2,
   Mic,
   RotateCcw,
-  BookMarked,
-  Award,
   Play,
+  LogIn,
 } from 'lucide-react';
 import { BrowserWarning } from './BrowserWarning';
+import { LoginModal } from './LoginModal';
 import { sounds } from '../services/soundEffects';
 import { UserProgress, ShoppingScenario } from '../types/dialogue';
-import { getScenarioById, ALL_SCENARIOS } from '../data/scenarios';
+import { getScenarioById } from '../data/scenarios';
 import { IMAGES } from '../constants/images';
 
 interface StartScreenProps {
@@ -31,9 +31,17 @@ export const StartScreen: React.FC<StartScreenProps> = ({
   onGoToProgress,
   onResumeScenario,
 }) => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const handleStart = () => {
     sounds.playTap();
     onStart();
+  };
+
+  const handleLoginLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    sounds.playTap();
+    setIsLoginModalOpen(true);
   };
 
   const lastScenario = userProgress.lastPracticedScenarioId
@@ -44,6 +52,18 @@ export const StartScreen: React.FC<StartScreenProps> = ({
     <div className="min-h-screen flex flex-col justify-between max-w-md mx-auto px-5 py-5 pb-24">
       {/* Top Section */}
       <header className="flex flex-col items-center text-center pt-1">
+        {/* Top-Right Login Link (opens in-page popup without navigating away) */}
+        <div className="w-full flex items-center justify-end mb-2">
+          <a
+            href="#login"
+            onClick={handleLoginLinkClick}
+            className="inline-flex items-center gap-1.5 text-xs font-korean font-bold text-[#25364A] hover:text-[#FF806B] transition-colors px-3 py-1.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-xs"
+          >
+            <LogIn className="w-3.5 h-3.5 text-[#FF806B]" />
+            <span>로그인</span>
+          </a>
+        </div>
+
         {/* Brand Logo Lockup */}
         <div className="flex items-center gap-2 mb-2">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#FF806B] to-[#FFA28B] flex items-center justify-center shadow-md shadow-[#FF806B]/25 text-white">
@@ -180,6 +200,11 @@ export const StartScreen: React.FC<StartScreenProps> = ({
           </p>
         </div>
       </footer>
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </div>
   );
 };
