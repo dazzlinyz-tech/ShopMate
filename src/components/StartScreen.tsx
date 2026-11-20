@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ShoppingBag,
   ArrowRight,
@@ -7,10 +7,9 @@ import {
   Mic,
   RotateCcw,
   Play,
-  LogIn,
 } from 'lucide-react';
 import { BrowserWarning } from './BrowserWarning';
-import { LoginModal } from './LoginModal';
+import { UserAuthControl } from './UserAuthControl';
 import { sounds } from '../services/soundEffects';
 import { UserProgress, ShoppingScenario } from '../types/dialogue';
 import { getScenarioById } from '../data/scenarios';
@@ -31,17 +30,9 @@ export const StartScreen: React.FC<StartScreenProps> = ({
   onGoToProgress,
   onResumeScenario,
 }) => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
   const handleStart = () => {
     sounds.playTap();
     onStart();
-  };
-
-  const handleLoginLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    sounds.playTap();
-    setIsLoginModalOpen(true);
   };
 
   const lastScenario = userProgress.lastPracticedScenarioId
@@ -52,16 +43,9 @@ export const StartScreen: React.FC<StartScreenProps> = ({
     <div className="min-h-screen flex flex-col justify-between max-w-md mx-auto px-5 py-5 pb-24">
       {/* Top Section */}
       <header className="flex flex-col items-center text-center pt-1">
-        {/* Top-Right Login Link (opens in-page popup without navigating away) */}
+        {/* Top-Right Auth Control (Login link or Profile Popover) */}
         <div className="w-full flex items-center justify-end mb-2">
-          <a
-            href="#login"
-            onClick={handleLoginLinkClick}
-            className="inline-flex items-center gap-1.5 text-xs font-korean font-bold text-[#25364A] hover:text-[#FF806B] transition-colors px-3 py-1.5 rounded-xl bg-white/80 border border-slate-200/80 shadow-xs"
-          >
-            <LogIn className="w-3.5 h-3.5 text-[#FF806B]" />
-            <span>로그인</span>
-          </a>
+          <UserAuthControl />
         </div>
 
         {/* Brand Logo Lockup */}
@@ -200,11 +184,6 @@ export const StartScreen: React.FC<StartScreenProps> = ({
           </p>
         </div>
       </footer>
-
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
     </div>
   );
 };

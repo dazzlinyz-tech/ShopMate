@@ -13,6 +13,7 @@ import { UserProgress, ShoppingScenario } from '../types/dialogue';
 import { ALL_SCENARIOS, SCENARIOS_BY_LEVEL, getScenarioById } from '../data/scenarios';
 import { sounds } from '../services/soundEffects';
 import { IMAGES } from '../constants/images';
+import { UserAuthControl } from './UserAuthControl';
 
 interface ProgressScreenProps {
   userProgress: UserProgress;
@@ -58,8 +59,8 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
     <div className="max-w-md mx-auto px-4 pt-4 pb-24">
       {/* Header */}
       <header className="mb-4">
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0">
             <h1 className="font-heading font-extrabold text-2xl text-[#25364A] tracking-tight">
               My Learning Progress
             </h1>
@@ -67,8 +68,8 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
               쇼핑 회화 실력과 완료한 시나리오 현황입니다
             </p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-700">
-            <Award className="w-5 h-5 stroke-[2.2]" />
+          <div className="flex items-center gap-2 shrink-0">
+            <UserAuthControl />
           </div>
         </div>
       </header>

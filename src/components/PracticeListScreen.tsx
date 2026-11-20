@@ -12,6 +12,7 @@ import {
 import { ShoppingScenario, UserProgress } from '../types/dialogue';
 import { SCENARIOS_BY_LEVEL, ALL_SCENARIOS } from '../data/scenarios';
 import { sounds } from '../services/soundEffects';
+import { UserAuthControl } from './UserAuthControl';
 
 interface PracticeListScreenProps {
   userProgress: UserProgress;
@@ -68,8 +69,8 @@ export const PracticeListScreen: React.FC<PracticeListScreenProps> = ({
     <div className="max-w-md mx-auto px-4 pt-4 pb-24">
       {/* Header */}
       <header className="mb-4">
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0">
             <h1 className="font-heading font-extrabold text-2xl text-[#25364A] tracking-tight">
               Shopping Practice
             </h1>
@@ -77,8 +78,8 @@ export const PracticeListScreen: React.FC<PracticeListScreenProps> = ({
               난이도별 60가지 실전 쇼핑 시나리오를 자유롭게 연습하세요
             </p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#A9D5F5]/30 border border-[#A9D5F5]/70 flex items-center justify-center text-[#25364A]">
-            <ShoppingBag className="w-5 h-5 text-[#25364A]" />
+          <div className="flex items-center gap-2 shrink-0">
+            <UserAuthControl />
           </div>
         </div>
       </header>

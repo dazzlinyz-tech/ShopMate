@@ -14,6 +14,7 @@ import { EXPRESSIONS_CATALOG, PHRASEBOOK_CATEGORIES } from '../data/scenarios';
 import { SpeechSynthesisManager } from '../services/speechService';
 import { StorageService } from '../services/storageService';
 import { sounds } from '../services/soundEffects';
+import { UserAuthControl } from './UserAuthControl';
 
 interface PhrasebookScreenProps {
   userProgress: UserProgress;
@@ -99,8 +100,8 @@ export const PhrasebookScreen: React.FC<PhrasebookScreenProps> = ({
     <div className="max-w-md mx-auto px-4 pt-4 pb-24">
       {/* Header */}
       <header className="mb-4">
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0">
             <h1 className="font-heading font-extrabold text-2xl text-[#25364A] tracking-tight">
               My Expressions
             </h1>
@@ -108,8 +109,8 @@ export const PhrasebookScreen: React.FC<PhrasebookScreenProps> = ({
               내 표현 모음 · {learnedSet.size}개 학습 완료 / 총 {EXPRESSIONS_CATALOG.length}개
             </p>
           </div>
-          <div className="w-10 h-10 rounded-2xl bg-[#FF806B]/15 border border-[#FF806B]/30 flex items-center justify-center text-[#FF806B]">
-            <BookOpen className="w-5 h-5 stroke-[2.2]" />
+          <div className="flex items-center gap-2 shrink-0">
+            <UserAuthControl />
           </div>
         </div>
       </header>

@@ -11,11 +11,14 @@ import { ResultScreen } from './components/ResultScreen';
 import { PhrasebookScreen } from './components/PhrasebookScreen';
 import { ProgressScreen } from './components/ProgressScreen';
 import { Navigation, TabKey } from './components/Navigation';
+import { LoginModal } from './components/LoginModal';
 import { ShoppingScenario, TurnProgress, UserProgress } from './types/dialogue';
 import { ALL_SCENARIOS, SCENARIOS_BY_LEVEL } from './data/scenarios';
 import { StorageService } from './services/storageService';
+import { useAuth } from './contexts/AuthContext';
 
 export default function App() {
+  const { lastSignInEventAt, isLoginModalOpen, closeLoginModal } = useAuth();
   const [currentTab, setCurrentTab] = useState<TabKey>('home');
   const [userProgress, setUserProgress] = useState<UserProgress>(() => StorageService.getProgress());
 
@@ -34,6 +37,17 @@ export default function App() {
   useEffect(() => {
     refreshProgress();
   }, []);
+
+  // Navigate back to the main page whenever a user logs in
+  useEffect(() => {
+    if (lastSignInEventAt) {
+      setIsPracticing(false);
+      setIsViewingResult(false);
+      setActiveScenario(null);
+      setCurrentTab('home');
+      closeLoginModal();
+    }
+  }, [lastSignInEventAt, closeLoginModal]);
 
   // Launch a specific scenario
   const handleLaunchScenario = (scenario: ShoppingScenario) => {
@@ -159,6 +173,9 @@ export default function App() {
           />
         </>
       )}
+
+      {/* Global Google Login Popup */}
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
     </div>
   );
 }
